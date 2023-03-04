@@ -11,7 +11,7 @@ module.exports = {
                 olive: {
                     50: '#f8f9f5',
                     100: '#f1f0db',
-                    200: '#e0e0b2',
+                    200: '#edf1d6',
                     300: '#bac07e',
                     400: '#609966',
                     500: '#637b2d',
@@ -25,7 +25,7 @@ module.exports = {
                 olive: {
                     css: {
                         '--tw-prose-body': theme('colors.olive[200]'),
-                        '--tw-prose-headings': theme('colors.olive[100]'),
+                        '--tw-prose-headings': theme('colors.olive[200]'),
                         '--tw-prose-lead': theme('colors.olive[300]'),
                         '--tw-prose-links': theme('colors.white'),
                         '--tw-prose-bold': theme('colors.white'),
