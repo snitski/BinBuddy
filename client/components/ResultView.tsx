@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
         padding: 10,
         backgroundColor: '#EDF1D6',
         flexDirection: 'row',
-        paddingTop: Platform.OS == 'ios' ? Constants.statusBarHeight : 10,
+        paddingTop: Constants.statusBarHeight,
     },
     bannerText: {
         fontSize: 18,
