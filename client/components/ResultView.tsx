@@ -1,7 +1,15 @@
 import { WebView } from 'react-native-webview';
-import { ActivityIndicator, TouchableOpacity, Text, StyleSheet, View } from 'react-native';
+import {
+    ActivityIndicator,
+    TouchableOpacity,
+    Text,
+    StyleSheet,
+    View,
+    Platform,
+} from 'react-native';
 import { useFonts, Lato_400Regular, Lato_900Black } from '@expo-google-fonts/lato';
 import { AntDesign } from '@expo/vector-icons';
+import Constants from 'expo-constants';
 
 export default function ResultView(props: {
     setImage: (image: string | null) => void;
@@ -11,33 +19,39 @@ export default function ResultView(props: {
 }) {
     const [fontsLoaded] = useFonts({
         Lato_400Regular,
-        Lato_900Black
+        Lato_900Black,
     });
 
     return (
         <>
-            <TouchableOpacity 
-                style={styles.banner} 
+            <TouchableOpacity
+                style={styles.banner}
                 onPress={() => {
                     props.setImage(null);
                     props.setSlug(null);
-                }}
-            >
+                }}>
                 <AntDesign name="back" size={25} color={'#609966'} />
                 <Text style={styles.bannerText}>Scan another item</Text>
             </TouchableOpacity>
 
-            {!props.slug ? 
-                <View style={{flex: 1, rowGap: 20, alignItems: 'center', justifyContent: 'center', backgroundColor: '#609966'}}>
+            {!props.slug ? (
+                <View
+                    style={{
+                        flex: 1,
+                        rowGap: 20,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        backgroundColor: '#609966',
+                    }}>
                     <Text style={styles.loadingText}>Loading...</Text>
-                    <ActivityIndicator size='large' color='#EDF1D6'/> 
+                    <ActivityIndicator size="large" color="#EDF1D6" />
                 </View>
-            : 
+            ) : (
                 <WebView
                     style={styles.main}
                     source={{ uri: `http://172.30.6.209:3000/pages/${props.slug}` }}
                 />
-            }
+            )}
         </>
     );
 }
@@ -47,22 +61,23 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#609966'
+        backgroundColor: '#609966',
     },
     banner: {
         padding: 10,
-        backgroundColor: "#EDF1D6",
-        flexDirection: 'row'
+        backgroundColor: '#EDF1D6',
+        flexDirection: 'row',
+        paddingTop: Platform.OS == 'ios' ? Constants.statusBarHeight : 10,
     },
     bannerText: {
         fontSize: 18,
         color: '#609966',
         marginLeft: 5,
-        fontFamily:'Lato_900Black'
+        fontFamily: 'Lato_900Black',
     },
     loadingText: {
         fontSize: 24,
         color: '#EDF1D6',
-        fontFamily:'Lato_900Black'
-    }
+        fontFamily: 'Lato_900Black',
+    },
 });
