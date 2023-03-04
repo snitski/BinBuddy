@@ -20,6 +20,7 @@ clip_labels = ["a photo of " + label for label in labels]
 # Route for object labeling
 @app.route("/", methods=["GET", "POST"])
 def label():
+    print("Got request")
     if request.files:
         # Get image from request
         image = request.files["image"]
@@ -56,7 +57,9 @@ def label():
             
             # Sort dictionary by probability
             sub_label_dict = dict(sorted(sub_label_dict.items(), key=lambda item: item[1], reverse=True))
+            print("Processed image")
             return json.dumps({"labels": label_dict, "sub_labels": sub_label_dict})
         else:
+            print("Processed image")
             return json.dumps({"labels": label_dict})
     return "No image provided"
