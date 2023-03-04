@@ -61,6 +61,7 @@ export default function App() {
 
     return (
         <>
+            <StatusBar />
             {image ? (
                 <ResultView
                     setImage={setImage}
