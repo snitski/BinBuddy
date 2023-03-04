@@ -9,11 +9,11 @@
         "apple device",
         "android device",
         "windows device",
-        "battery",
+        "lithium battery",
         "ink cartridge",
         "lightbulb",
-        "appliances",
-        "miscellaneous electronic device"
+        "appliance",
+        "electronic device"
     ],
     "glass": [
         "glass bottle",
