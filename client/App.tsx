@@ -56,17 +56,24 @@ export default function App() {
     }, [image]);
 
     return (
-        image ? 
-            <ResultView setImage={setImage} image={image} setSlug={setSlug} slug={slug} />
-        :
-            <View style={styles.main}>
-                <StatusBar />
-                {(!cameraIsOpen ? 
-                    <SplashScreen setCameraIsOpen={setCameraIsOpen}/>
-                : 
-                    <CameraView image={image} setImage={setImage} setCameraIsOpen={setCameraIsOpen}/>
-                )}
-            </View>
+        <>
+            <StatusBar />
+            {image ? (
+                <ResultView setImage={setImage} image={image} setSlug={setSlug} slug={slug} />
+            ) : (
+                <View style={styles.main}>
+                    {!cameraIsOpen ? (
+                        <SplashScreen setCameraIsOpen={setCameraIsOpen} />
+                    ) : (
+                        <CameraView
+                            image={image}
+                            setImage={setImage}
+                            setCameraIsOpen={setCameraIsOpen}
+                        />
+                    )}
+                </View>
+            )}
+        </>
     );
 }
 
@@ -75,12 +82,12 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#609966'
+        backgroundColor: '#609966',
     },
     button: {
         padding: 10,
         margin: 5,
         borderRadius: 15,
-        backgroundColor: "#fff"
-    }
+        backgroundColor: '#fff',
+    },
 });
