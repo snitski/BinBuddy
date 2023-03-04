@@ -14,6 +14,7 @@ processor = CLIPProcessor.from_pretrained("openai/clip-vit-large-patch14")
 # Load labels
 file = open('labels.json')
 data = json.load(file)
+file.close()
 labels = list(data.keys())
 clip_labels = ["a photo of " + label for label in labels]
 
