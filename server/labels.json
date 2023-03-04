@@ -1,0 +1,42 @@
+{
+    "plastic": [
+        "plastic bottle",
+        "plastic bag",
+        "miscellaneous plastic"
+    ],
+    "paper": [],
+    "electronic device": [
+        "apple device",
+        "android device",
+        "windows device",
+        "battery",
+        "ink cartridge",
+        "lightbulb",
+        "appliances",
+        "miscellaneous electronic device"
+    ],
+    "glass": [
+        "glass bottle",
+        "eye glasses",
+        "miscellaneous glass"
+    ],
+    "cardboard": [],
+    "metal": [
+        "soda can",
+        "scrap metal",
+        "aerosol can",
+        "miscellaneous metal"
+    ],
+    "clothing": [],
+    "compost": [
+        "food waste",
+        "yard waste",
+        "miscellaneous compost"
+    ],
+    "medical waste": [
+        "medicine",
+        "syringe",
+        "miscellaneous medical waste"
+    ],
+    "trash": []
+}
