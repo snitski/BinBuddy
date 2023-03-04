@@ -1,5 +1,5 @@
 ---
-title: 'Recycling Miscellaneous Plastic'
+title: 'Recycling Plastic'
 location: 'Brookhaven, NY'
 ---
 
