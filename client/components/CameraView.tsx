@@ -1,7 +1,7 @@
 import { Camera, CameraType, ImageType } from 'expo-camera';
 import * as ImagePicker from 'expo-image-picker';
 import { Image } from 'expo-image';
-import { StyleSheet, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, useWindowDimensions } from 'react-native';
 import { useRef, useState } from 'react';
 import { AntDesign } from '@expo/vector-icons';
 
@@ -12,6 +12,9 @@ export default function CameraView(props: {
     const [type, setType] = useState(CameraType.back);
     const [permission, requestPermission] = Camera.useCameraPermissions();
     const camera = useRef<Camera>(null);
+
+    const { width } = useWindowDimensions();
+    const height = Math.round((width * 16) / 9);
 
     if (!permission?.granted) requestPermission();
 
@@ -49,7 +52,11 @@ export default function CameraView(props: {
     return (
         <View style={styles.main}>
             {permission && !props.image ? (
-                <Camera ratio="16:9" type={type} style={styles.camera} ref={camera}>
+                <Camera
+                    ratio="16:9"
+                    type={type}
+                    style={{ ...styles.camera, height: height, width: '100%' }}
+                    ref={camera}>
                     <TouchableOpacity style={styles.button} onPress={pickImageAsync}>
                         <AntDesign name="picture" size={25} color="black" />
                     </TouchableOpacity>
@@ -76,7 +83,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     camera: {
-        flex: 1,
         alignSelf: 'stretch',
         alignItems: 'flex-end',
         justifyContent: 'center',
