@@ -28,16 +28,16 @@ export default function App() {
                 const labels = await uploadImage(image);
                 console.log(labels);
                 const label = labels.labels[0][0]
-                    /*.toLowerCase()
-                    .split(' ')
-                    .map((s: string) => s.charAt(0).toUpperCase() + s.substring(1))
-                    .join(' ');*/
-                const sublabel = labels.sub_labels?.[0][0]
-                    /*.toLowerCase()
+                    .toLowerCase()
                     .split(' ')
                     .map((s: string) => s.charAt(0).toUpperCase() + s.substring(1))
                     .join(' ');
-                Alert.alert('Label', sublabel ? `${label} (${sublabel})` : label);*/
+                const sublabel = labels.sub_labels?.[0][0]
+                    .toLowerCase()
+                    .split(' ')
+                    .map((s: string) => s.charAt(0).toUpperCase() + s.substring(1))
+                    .join(' ');
+                //Alert.alert('Label', sublabel ? `${label} (${sublabel})` : label);*/
 
                 if (sublabel) {
                     let path =
@@ -68,7 +68,7 @@ export default function App() {
                         }}
                     />
                     <WebView
-                        style={{ width: '100%', height: '100%', backgroundColor: 'white' }}
+                        style={{ width: '100%', height: '100%' }}
                         source={{ uri: `http://172.30.6.209:3000/pages/${slug}` }}
                     />
                 </>
