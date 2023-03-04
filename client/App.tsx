@@ -6,12 +6,13 @@ import { useState } from 'react';
 
 export default function App() {
     const [cameraIsOpen, setCameraIsOpen] = useState(false);
+    const [label, setLabel] = useState<string | null>(null);
 
     return (
         (!cameraIsOpen ? 
             <View style={styles.main}>
-                <Text>Test</Text>
-                <ImagePickerButton />
+                <Text>{label}</Text>
+                <ImagePickerButton setLabel={setLabel} />
                 <Button 
                     title='Open Camera'
                     onPress={() => setCameraIsOpen(true)}

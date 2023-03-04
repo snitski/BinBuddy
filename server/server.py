@@ -35,11 +35,11 @@ def label():
         label = labels[probs.argmax().item()]
 
         # Create dictionary of labels and probabilities
-        label_dict = {}
+        label_list = []
         for i in range(len(labels)):
-            label_dict[labels[i]] = probs[0][i].item()
+            label_list.append((labels[i], probs[0][i].item()))
         # Sort dictionary by probability
-        label_dict = dict(sorted(label_dict.items(), key=lambda item: item[1], reverse=True))
+        label_list = sorted(label_list, key=lambda x: x[1], reverse=True)
 
         # Run second pass is needed
         sub_labels = data[label]
@@ -50,16 +50,16 @@ def label():
             sub_logits_per_image = sub_outputs.logits_per_image
             sub_probs = sub_logits_per_image.softmax(dim=1)
 
-            # Create dictionary of labels and probabilities
-            sub_label_dict = {}
+            # Create list of sub-labels and probabilities
+            sub_label_list = []
             for i in range(len(sub_labels)):
-                sub_label_dict[sub_labels[i]] = sub_probs[0][i].item()
+                sub_label_list.append((sub_labels[i], sub_probs[0][i].item()))
             
-            # Sort dictionary by probability
-            sub_label_dict = dict(sorted(sub_label_dict.items(), key=lambda item: item[1], reverse=True))
+            # Sort labels by probability
+            sub_label_list = sorted(sub_label_list, key=lambda x: x[1], reverse=True)
             print("Processed image")
-            return json.dumps({"labels": label_dict, "sub_labels": sub_label_dict})
+            return json.dumps({"labels": label_list, "sub_labels": sub_label_list})
         else:
             print("Processed image")
-            return json.dumps({"labels": label_dict})
+            return json.dumps({"labels": label_list})
     return "No image provided"
