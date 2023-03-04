@@ -1,0 +1,24 @@
+.container {
+  text-align: center;
+  padding-top: 10rem;
+  color: #445566;
+}
+
+.header {
+  font-size: 3rem;
+}
+
+.subtitle {
+  margin-bottom: 2rem;
+}
+
+.blog-list {
+  text-align: start;
+  margin: auto;
+  width: max-content;
+}
+
+.blog-list a {
+  color: rgb(4, 165, 165);
+  text-decoration: underline;
+}

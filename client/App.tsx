@@ -3,7 +3,6 @@ import CameraView from './components/CameraView';
 import SplashScreen from './components/SplashScreen';
 import { useEffect, useState } from 'react';
 import * as FileSystem from 'expo-file-system';
-import { AntDesign } from '@expo/vector-icons';
 
 const uploadImage = async (uri: string) => {
     console.log('Uploading image...');
