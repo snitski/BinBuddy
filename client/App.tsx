@@ -28,24 +28,27 @@ export default function App() {
                 const labels = await uploadImage(image);
                 console.log(labels);
                 const label = labels.labels[0][0]
-                    .toLowerCase()
+                    /*.toLowerCase()
                     .split(' ')
                     .map((s: string) => s.charAt(0).toUpperCase() + s.substring(1))
-                    .join(' ');
+                    .join(' ');*/
                 const sublabel = labels.sub_labels?.[0][0]
-                    .toLowerCase()
+                    /*.toLowerCase()
                     .split(' ')
                     .map((s: string) => s.charAt(0).toUpperCase() + s.substring(1))
                     .join(' ');
-                Alert.alert('Label', sublabel ? `${label} (${sublabel})` : label);
+                Alert.alert('Label', sublabel ? `${label} (${sublabel})` : label);*/
 
                 if (sublabel) {
-                    let path = label.toLowerCase().replace(' ', '-') + '-' + sublabel.toLowerCase().replace(' ', '-');
-                    console.log(path)
+                    let path =
+                        label.toLowerCase().replace(' ', '-') +
+                        '-' +
+                        sublabel.toLowerCase().replace(' ', '-');
+                    console.log(path);
                     setSlug(path);
                 } else {
                     let path = label.toLowerCase().replace(' ', '-');
-                    console.log(path)
+                    console.log(path);
                     setSlug(path);
                 }
             })();
@@ -55,10 +58,20 @@ export default function App() {
     return (
         <>
             {slug ? (
-                <WebView
-                    style={{ width: '100%', height: '100%', backgroundColor: 'white' }}
-                    source={{ uri: `http://172.30.6.209:3000/pages/${slug}` }}
-                />
+                <>
+                    <Button
+                        title="Go Back"
+                        onPress={() => {
+                            setSlug(null);
+                            setImage(null);
+                            setCameraIsOpen(false);
+                        }}
+                    />
+                    <WebView
+                        style={{ width: '100%', height: '100%', backgroundColor: 'white' }}
+                        source={{ uri: `http://172.30.6.209:3000/pages/${slug}` }}
+                    />
+                </>
             ) : (
                 <View style={styles.main}>
                     {!cameraIsOpen ? (
