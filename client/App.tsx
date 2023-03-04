@@ -1,45 +1,43 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button } from 'react-native';
-import ImagePickerButton from './components/ImagePickerButton';
 import CameraView from './components/CameraView';
 import { useState } from 'react';
 
 export default function App() {
     const [cameraIsOpen, setCameraIsOpen] = useState(false);
-    const [label, setLabel] = useState<string | null>(null);
+    const [image, setImage] = useState(null);
 
     return (
-        (!cameraIsOpen ? 
-            <View style={styles.main}>
-                <Text>{label}</Text>
-                <ImagePickerButton setLabel={setLabel} />
+        <View style={styles.main}>
+        {(!cameraIsOpen ? 
+            (<>
+                <Text>Test</Text>
                 <Button 
                     title='Open Camera'
                     onPress={() => setCameraIsOpen(true)}
                 />
                 <StatusBar style="auto" />
-            </View>
+            </>)
         :
-            <View style={styles.camera}>
-                <CameraView />
+            (<>
+                <CameraView image={image} setImage={setImage}/>
                 <Button 
-                    title='Close Camera'
-                    onPress={() => setCameraIsOpen(false)}
+                    title='Go Back'
+                    onPress={() => {setCameraIsOpen(false); setImage(null)}}
                 />
-                </View>
-        )
+            </>)
+        )}
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
     main: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#000',
         alignItems: 'center',
-        justifyContent: 'center'
-    },
-    camera: {
-        flex: 1,
-        rowGap: 5
+        justifyContent: 'center',
+        paddingTop: '5%',
+        paddingBottom: '15%'
     }
 });
