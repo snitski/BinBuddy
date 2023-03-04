@@ -19,6 +19,7 @@ const uploadImage = async (uri: string) => {
 export default function App() {
     const [cameraIsOpen, setCameraIsOpen] = useState(false);
     const [image, setImage] = useState<string | null>(null);
+    const [slug, setSlug] = useState<string | null>(null);
 
     useEffect(() => {
         if (image) {
