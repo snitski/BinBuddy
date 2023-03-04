@@ -3,6 +3,7 @@ import CameraView from './components/CameraView';
 import SplashScreen from './components/SplashScreen';
 import { useEffect, useState } from 'react';
 import * as FileSystem from 'expo-file-system';
+import ResultView from './components/ResultView';
 
 const uploadImage = async (uri: string) => {
     console.log('Uploading image...');
@@ -55,14 +56,17 @@ export default function App() {
     }, [image]);
 
     return (
-        <View style={styles.main}>
-            <StatusBar />
-            {!cameraIsOpen ? 
-                <SplashScreen setCameraIsOpen={setCameraIsOpen}/>
-            : 
-                <CameraView image={image} setImage={setImage} setCameraIsOpen={setCameraIsOpen}/>
-            }
-        </View>
+        image ? 
+            <ResultView setImage={setImage} image={image} setSlug={setSlug} slug={slug} />
+        :
+            <View style={styles.main}>
+                <StatusBar />
+                {(!cameraIsOpen ? 
+                    <SplashScreen setCameraIsOpen={setCameraIsOpen}/>
+                : 
+                    <CameraView image={image} setImage={setImage} setCameraIsOpen={setCameraIsOpen}/>
+                )}
+            </View>
     );
 }
 

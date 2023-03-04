@@ -27,7 +27,7 @@ export default function SplashScreen(props: {
                         contentFit='contain'
                     />
                 :
-                    <Text>Failed to load</Text>
+                    <Text>Failed to load logo.</Text>
                 }
                     <Text style={{fontFamily: 'Lato_900Black', color:'#EDF1D6', fontSize: 26}}>
                         Welcome to BinBuddy!

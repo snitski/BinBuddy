@@ -1,7 +1,6 @@
 import { Camera, CameraType, ImageType } from 'expo-camera';
 import * as ImagePicker from 'expo-image-picker';
-import { Image } from 'expo-image';
-import { StyleSheet, View, TouchableOpacity, useWindowDimensions } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, useWindowDimensions } from 'react-native';
 import { useRef, useState } from 'react';
 import { AntDesign } from '@expo/vector-icons';
 
@@ -52,7 +51,7 @@ export default function CameraView(props: {
 
     return (
         <View style={styles.main}>
-            {permission && !props.image ? (
+            {permission ? (
                 <Camera
                     ratio="16:9"
                     type={type}
@@ -82,13 +81,7 @@ export default function CameraView(props: {
                         </TouchableOpacity>
                     </View>
                 </Camera>
-            ) 
-            : 
-            (
-                <View style={{ flex: 1, alignSelf: 'stretch' }}>
-                    <Image style={styles.main} source={props.image} contentFit="cover" />
-                </View>
-            )}
+            ) : (<View><Text>Please provide camera permission.</Text></View>)}
         </View>
     );
 }
