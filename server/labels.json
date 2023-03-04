@@ -33,10 +33,10 @@
         "yard waste",
         "miscellaneous compost"
     ],
-    "medical waste": [
-        "medicine",
+    "medicine": [
+        "pill bottle",
         "syringe",
-        "miscellaneous medical waste"
+        "miscellaneous medicine"
     ],
     "trash": []
 }

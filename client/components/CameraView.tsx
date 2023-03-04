@@ -2,13 +2,13 @@ import { Camera, CameraType, ImageType } from 'expo-camera';
 import * as ImagePicker from 'expo-image-picker';
 import { Image } from 'expo-image';
 import { StyleSheet, Text, View, TouchableOpacity, Button } from 'react-native';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { AntDesign } from '@expo/vector-icons'; 
 
-export default function CameraView({image, setImage}) {
+export default function CameraView(props: {image: string | null, setImage: (image: string) => void}) {
     const [type, setType] = useState(CameraType.back);
     const [permission, requestPermission] = Camera.useCameraPermissions();
-    let camera : Camera
+    const camera = useRef<Camera>(null);
     
     if (!permission) 
         Camera.requestCameraPermissionsAsync();
@@ -20,11 +20,15 @@ export default function CameraView({image, setImage}) {
     }
 
     const captureImageAsync = async () => {
-        setImage(await camera.takePictureAsync({
-            quality: 1,
-            imageType: ImageType.jpg
-        }));
-        if(camera != null) await camera.pausePreview();
+        console.log("Capturing image...")
+        if (camera.current != null) {
+            let imageData = await camera.current.takePictureAsync({
+                quality: 1,
+                imageType: ImageType.jpg
+            });
+            await camera.current.pausePreview();
+            props.setImage(imageData.uri);
+        }
     }
 
     const pickImageAsync = async () => {
@@ -39,20 +43,18 @@ export default function CameraView({image, setImage}) {
             alert("You did not select an image.");
         }
         else {
-            setImage(result.assets[0].uri);
+            props.setImage(result.assets[0].uri);
         }
     };
 
     return (
         <View style={styles.main}>
-            {permission && !image ? 
+            {permission && !props.image ? 
                 <Camera
                     ratio="16:9"
                     type={type}
                     style={styles.camera} 
-                    ref={(r) => {
-                        camera = r
-                    }}
+                    ref={camera}
                 > 
                     <TouchableOpacity style={styles.button} onPress={pickImageAsync}> 
                         <AntDesign name="picture" size={25} color="black" />
@@ -68,7 +70,7 @@ export default function CameraView({image, setImage}) {
                 <View style={{flex: 1, alignSelf: 'stretch'}}>
                     <Image
                         style={styles.main}
-                        source={image}
+                        source={props.image}
                         contentFit="cover"
                     />
                 </View>

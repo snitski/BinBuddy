@@ -1,11 +1,33 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import CameraView from './components/CameraView';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import * as FileSystem from 'expo-file-system';
+
+const uploadImage = async (uri: string) => {
+    console.log('Uploading image...');
+    const res = await FileSystem.uploadAsync('http://172.30.6.209:5000', uri, {
+        uploadType: FileSystem.FileSystemUploadType.MULTIPART,
+        fieldName: 'image',
+        httpMethod: 'POST',
+    });
+    console.log('Image uploaded!');
+
+    return JSON.parse(res.body);
+};
 
 export default function App() {
     const [cameraIsOpen, setCameraIsOpen] = useState(false);
-    const [image, setImage] = useState(null);
+    const [image, setImage] = useState<string | null>(null);
+
+    useEffect(() => {
+        if (image) {
+            (async () => {
+                const labels = await uploadImage(image);
+                console.log(labels);
+            })();
+        }
+    }, [image]);
 
     return (
         <View style={styles.main}>
