@@ -1,8 +1,9 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button, Alert } from 'react-native';
+import { StatusBar, StyleSheet, Text, View, Alert, TouchableOpacity } from 'react-native';
 import CameraView from './components/CameraView';
+import SplashScreen from './components/SplashScreen';
 import { useEffect, useState } from 'react';
 import * as FileSystem from 'expo-file-system';
+import { AntDesign } from '@expo/vector-icons';
 
 const uploadImage = async (uri: string) => {
     console.log('Uploading image...');
@@ -42,24 +43,12 @@ export default function App() {
 
     return (
         <View style={styles.main}>
-            {!cameraIsOpen ? (
-                <>
-                    <Text>Test</Text>
-                    <Button title="Open Camera" onPress={() => setCameraIsOpen(true)} />
-                    <StatusBar style="auto" />
-                </>
-            ) : (
-                <>
-                    <CameraView image={image} setImage={setImage} />
-                    <Button
-                        title="Go Back"
-                        onPress={() => {
-                            setCameraIsOpen(false);
-                            setImage(null);
-                        }}
-                    />
-                </>
-            )}
+            <StatusBar />
+            {!cameraIsOpen ? 
+                <SplashScreen setCameraIsOpen={setCameraIsOpen}/>
+            : 
+                <CameraView image={image} setImage={setImage} setCameraIsOpen={setCameraIsOpen}/>
+            }
         </View>
     );
 }
@@ -67,10 +56,14 @@ export default function App() {
 const styles = StyleSheet.create({
     main: {
         flex: 1,
-        backgroundColor: '#000',
         alignItems: 'center',
         justifyContent: 'center',
-        paddingTop: '5%',
-        paddingBottom: '15%',
+        backgroundColor: '#609966'
     },
+    button: {
+        padding: 10,
+        margin: 5,
+        borderRadius: 15,
+        backgroundColor: "#fff"
+    }
 });

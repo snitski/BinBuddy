@@ -7,7 +7,8 @@ import { AntDesign } from '@expo/vector-icons';
 
 export default function CameraView(props: {
     image: string | null;
-    setImage: (image: string) => void;
+    setImage: (image: string | null) => void;
+    setCameraIsOpen: (cameraIsOpen: boolean) => void;
 }) {
     const [type, setType] = useState(CameraType.back);
     const [permission, requestPermission] = Camera.useCameraPermissions();
@@ -56,18 +57,34 @@ export default function CameraView(props: {
                     ratio="16:9"
                     type={type}
                     style={{ ...styles.camera, height: height, width: '100%' }}
-                    ref={camera}>
-                    <TouchableOpacity style={styles.button} onPress={pickImageAsync}>
-                        <AntDesign name="picture" size={25} color="black" />
-                    </TouchableOpacity>
+                    ref={camera}
+                >
+                    <View style={styles.topCamera}>
+                        <TouchableOpacity 
+                            style={styles.button} 
+                            onPress={() => {
+                                props.setCameraIsOpen(false);
+                                props.setImage(null);
+                            }}
+                        >
+                            <AntDesign name="back" size={25} color={'#609966'} />
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.bottomCamera}>
+                        <TouchableOpacity style={styles.button} onPress={pickImageAsync}>
+                            <AntDesign name="picture" size={25} color="#609966" />
+                        </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.shutterButton} onPress={captureImageAsync} />
+                        <TouchableOpacity style={styles.shutterButton} onPress={captureImageAsync} />
 
-                    <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
-                        <AntDesign name="sync" size={25} color="black" />
-                    </TouchableOpacity>
+                        <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
+                            <AntDesign name="sync" size={25} color="#609966" />
+                        </TouchableOpacity>
+                    </View>
                 </Camera>
-            ) : (
+            ) 
+            : 
+            (
                 <View style={{ flex: 1, alignSelf: 'stretch' }}>
                     <Image style={styles.main} source={props.image} contentFit="cover" />
                 </View>
@@ -81,30 +98,42 @@ const styles = StyleSheet.create({
         flex: 1,
         alignSelf: 'stretch',
         alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#000'
     },
     camera: {
+        alignSelf: 'stretch',
+        flexDirection: 'column',
+    },
+    topCamera: {
+        flex: 1,
+        backgroundColor: 'transparent'
+    },
+    bottomCamera: {
+        flex: 1,
         alignSelf: 'stretch',
         alignItems: 'flex-end',
         justifyContent: 'center',
         flexDirection: 'row',
-        columnGap: 50,
+        columnGap: 30,
+        backgroundColor: 'transparent'
     },
     button: {
         width: 50,
         height: 50,
-        bottom: 15,
+        margin: 15,
         borderRadius: 50,
-        backgroundColor: '#fff',
+        backgroundColor: '#EDF1D6',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'center'
     },
     shutterButton: {
         width: 70,
         height: 70,
         bottom: 15,
         borderRadius: 50,
-        backgroundColor: '#fff',
+        backgroundColor: '#EDF1D6',
         alignItems: 'center',
-        justifyContent: 'center',
-    },
+        justifyContent: 'center'
+    }
 });
