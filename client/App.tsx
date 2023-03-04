@@ -1,9 +1,8 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button, Alert } from 'react-native';
+import { StatusBar, StyleSheet, Text, View, Alert, TouchableOpacity } from 'react-native';
 import CameraView from './components/CameraView';
+import SplashScreen from './components/SplashScreen';
 import { useEffect, useState } from 'react';
 import * as FileSystem from 'expo-file-system';
-import { WebView } from 'react-native-webview';
 
 const uploadImage = async (uri: string) => {
     console.log('Uploading image...');
@@ -56,55 +55,28 @@ export default function App() {
     }, [image]);
 
     return (
-        <>
-            {slug ? (
-                <>
-                    <Button
-                        title="Go Back"
-                        onPress={() => {
-                            setSlug(null);
-                            setImage(null);
-                            setCameraIsOpen(false);
-                        }}
-                    />
-                    <WebView
-                        style={{ width: '100%', height: '100%' }}
-                        source={{ uri: `http://172.30.6.209:3000/pages/${slug}` }}
-                    />
-                </>
-            ) : (
-                <View style={styles.main}>
-                    {!cameraIsOpen ? (
-                        <>
-                            <Text>Test</Text>
-                            <Button title="Open Camera" onPress={() => setCameraIsOpen(true)} />
-                            <StatusBar style="auto" />
-                        </>
-                    ) : (
-                        <>
-                            <CameraView image={image} setImage={setImage} />
-                            <Button
-                                title="Go Back"
-                                onPress={() => {
-                                    setCameraIsOpen(false);
-                                    setImage(null);
-                                }}
-                            />
-                        </>
-                    )}
-                </View>
-            )}
-        </>
+        <View style={styles.main}>
+            <StatusBar />
+            {!cameraIsOpen ? 
+                <SplashScreen setCameraIsOpen={setCameraIsOpen}/>
+            : 
+                <CameraView image={image} setImage={setImage} setCameraIsOpen={setCameraIsOpen}/>
+            }
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
     main: {
         flex: 1,
-        backgroundColor: 'white',
         alignItems: 'center',
         justifyContent: 'center',
-        paddingTop: '5%',
-        paddingBottom: '15%',
+        backgroundColor: '#609966'
     },
+    button: {
+        padding: 10,
+        margin: 5,
+        borderRadius: 15,
+        backgroundColor: "#fff"
+    }
 });
