@@ -35,7 +35,20 @@ export default function App() {
                     .split(' ')
                     .map((s: string) => s.charAt(0).toUpperCase() + s.substring(1))
                     .join(' ');
-                Alert.alert('Label', sublabel ? `${label} (${sublabel})` : label);
+                //Alert.alert('Label', sublabel ? `${label} (${sublabel})` : label);*/
+
+                if (sublabel) {
+                    let path =
+                        label.toLowerCase().replace(' ', '-') +
+                        '-' +
+                        sublabel.toLowerCase().replace(' ', '-');
+                    console.log(path);
+                    setSlug(path);
+                } else {
+                    let path = label.toLowerCase().replace(' ', '-');
+                    console.log(path);
+                    setSlug(path);
+                }
             })();
         }
     }, [image]);

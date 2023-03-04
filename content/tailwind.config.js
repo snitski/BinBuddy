@@ -30,7 +30,7 @@ module.exports = {
                         '--tw-prose-links': theme('colors.white'),
                         '--tw-prose-bold': theme('colors.white'),
                         '--tw-prose-counters': theme('colors.olive[100]'),
-                        '--tw-prose-bullets': theme('colors.olive[600]'),
+                        '--tw-prose-bullets': theme('colors.olive[100]'),
                         '--tw-prose-hr': theme('colors.olive[200]'),
                         '--tw-prose-quotes': theme('colors.olive[100]'),
                         '--tw-prose-quote-borders': theme('colors.olive[700]'),
