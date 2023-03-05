@@ -17,9 +17,6 @@ export default function CameraView(props: {
     const { width } = useWindowDimensions();
     const height = Math.round((width * 16) / 9);
 
-    // Requesting permission to use the camera
-    if (!permission?.granted) requestPermission();
-
     // Toggling between front and back camera
     const toggleCameraType = async () => {
         setType(type === CameraType.back ? CameraType.front : CameraType.back);
@@ -62,7 +59,7 @@ export default function CameraView(props: {
                     type={type}
                     style={{ ...styles.camera, height: height, width: '100%' }}
                     ref={camera}
-                    onCameraReady={() => {if(!permission) requestPermission()}}
+                    onCameraReady={() => {if(!permission?.granted) requestPermission()}}
                 >
                     <View style={styles.topCamera}>
                         <TouchableOpacity
