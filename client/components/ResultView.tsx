@@ -1,16 +1,9 @@
 import { WebView } from 'react-native-webview';
-import {
-    ActivityIndicator,
-    TouchableOpacity,
-    Text,
-    StyleSheet,
-    View,
-    Platform,
-    Button,
-} from 'react-native';
+import { ActivityIndicator, TouchableOpacity, Text, StyleSheet, View } from 'react-native';
 import { useFonts, Lato_400Regular, Lato_900Black } from '@expo-google-fonts/lato';
 import { AntDesign } from '@expo/vector-icons';
 import Constants from 'expo-constants';
+import { Image } from 'expo-image';
 
 export default function ResultView(props: {
     setImage: (image: string | null) => void;
@@ -40,41 +33,40 @@ export default function ResultView(props: {
             </TouchableOpacity>
 
             {!props.slug ? (
-                <View
-                    style={{
-                        flex: 1,
-                        rowGap: 20,
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        backgroundColor: '#609966',
-                    }}>
-                    <Text style={styles.loadingText}>Loading...</Text>
-                    <ActivityIndicator size="large" color="#EDF1D6" />
+                <View style={styles.centerContent}>
+                    <Text style={styles.centerText}>Processing...</Text>
+                    <ActivityIndicator
+                        style={{ transform: [{ scaleX: 2 }, { scaleY: 2 }] }}
+                        size="large"
+                        color="#EDF1D6"
+                    />
                 </View>
             ) : !props.confirmed ? (
-                <View
-                    style={{
-                        flex: 1,
-                        rowGap: 20,
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        backgroundColor: '#609966',
-                    }}>
-                    <Text style={styles.loadingText}>Is this {props.labelText}?</Text>
-                    <Button
-                        title="Yes"
-                        onPress={() => {
-                            props.setConfirmed(true);
-                        }}
+                <View style={styles.centerContent}>
+                    <Image
+                        source={props.image}
+                        style={{ width: 240, height: 380, borderRadius: 15 }}
+                        contentFit="cover"
                     />
-                    <Button
-                        title="No, retake"
-                        onPress={() => {
-                            props.setImage(null);
-                            props.setSlug(null);
-                        }}
-                    />
-                    <ActivityIndicator size="large" color="#EDF1D6" />
+                    <Text style={styles.centerText}>Is this {props.labelText}?</Text>
+                    <View style={{ flexDirection: 'row', columnGap: 10 }}>
+                        <TouchableOpacity
+                            style={styles.button}
+                            onPress={() => {
+                                props.setConfirmed(true);
+                            }}>
+                            <Text style={styles.buttonText}>Yes</Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity
+                            style={styles.button}
+                            onPress={() => {
+                                props.setImage(null);
+                                props.setSlug(null);
+                            }}>
+                            <Text style={styles.buttonText}>No</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             ) : (
                 <WebView
@@ -97,7 +89,7 @@ const styles = StyleSheet.create({
         padding: 10,
         backgroundColor: '#EDF1D6',
         flexDirection: 'row',
-        paddingTop: Constants.statusBarHeight,
+        paddingTop: Constants.statusBarHeight + 10,
     },
     bannerText: {
         fontSize: 18,
@@ -105,9 +97,30 @@ const styles = StyleSheet.create({
         marginLeft: 5,
         fontFamily: 'Lato_900Black',
     },
-    loadingText: {
-        fontSize: 24,
+    centerText: {
+        fontSize: 32,
         color: '#EDF1D6',
         fontFamily: 'Lato_900Black',
+        textAlign: 'center',
+        margin: 10,
+    },
+    centerContent: {
+        flex: 1,
+        rowGap: 20,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#609966',
+    },
+    button: {
+        width: 100,
+        padding: 15,
+        borderRadius: 15,
+        backgroundColor: '#EDF1D6',
+    },
+    buttonText: {
+        fontSize: 24,
+        color: '#609966',
+        fontFamily: 'Lato_900Black',
+        alignSelf: 'center',
     },
 });
