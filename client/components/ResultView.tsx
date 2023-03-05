@@ -27,33 +27,34 @@ export default function ResultView(props: {
                 onPress={() => {
                     props.setImage(null);
                     props.setSlug(null);
-                }}
-            >
+                }}>
                 <AntDesign name="back" size={25} color={'#609966'} />
                 <Text style={styles.bannerText}>Scan another item</Text>
             </TouchableOpacity>
 
-            {!props.slug ?
-                <View
-                    style={styles.centerContent}>
-                    <Text style={styles.centerText}>Processing...</Text>
-                    <ActivityIndicator style={{ transform: [{ scaleX: 2 }, { scaleY: 2 }] }} size="large" color="#EDF1D6" />
-                </View>
-            : !props.confirmed ?
+            {!props.slug ? (
                 <View style={styles.centerContent}>
-                    <Image 
+                    <Text style={styles.centerText}>Processing...</Text>
+                    <ActivityIndicator
+                        style={{ transform: [{ scaleX: 2 }, { scaleY: 2 }] }}
+                        size="large"
+                        color="#EDF1D6"
+                    />
+                </View>
+            ) : !props.confirmed ? (
+                <View style={styles.centerContent}>
+                    <Image
                         source={props.image}
-                        style={{width: 240, height: 380, borderRadius: 15}} 
-                        contentFit='cover' 
+                        style={{ width: 240, height: 380, borderRadius: 15 }}
+                        contentFit="cover"
                     />
                     <Text style={styles.centerText}>Is this {props.labelText}?</Text>
-                    <View style={{flexDirection: 'row', columnGap: 10}}>
+                    <View style={{ flexDirection: 'row', columnGap: 10 }}>
                         <TouchableOpacity
                             style={styles.button}
                             onPress={() => {
                                 props.setConfirmed(true);
-                            }}
-                        >
+                            }}>
                             <Text style={styles.buttonText}>Yes</Text>
                         </TouchableOpacity>
 
@@ -62,18 +63,17 @@ export default function ResultView(props: {
                             onPress={() => {
                                 props.setImage(null);
                                 props.setSlug(null);
-                            }}
-                        >
+                            }}>
                             <Text style={styles.buttonText}>No</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
-            :
+            ) : (
                 <WebView
                     style={styles.main}
                     source={{ uri: `http://172.30.6.209:3000/pages/${props.slug}` }}
                 />
-            }
+            )}
         </>
     );
 }
@@ -102,14 +102,14 @@ const styles = StyleSheet.create({
         color: '#EDF1D6',
         fontFamily: 'Lato_900Black',
         textAlign: 'center',
-        margin: 10
+        margin: 10,
     },
     centerContent: {
         flex: 1,
         rowGap: 20,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#609966'
+        backgroundColor: '#609966',
     },
     button: {
         width: 100,
@@ -121,6 +121,6 @@ const styles = StyleSheet.create({
         fontSize: 24,
         color: '#609966',
         fontFamily: 'Lato_900Black',
-        alignSelf: 'center'
-    }
+        alignSelf: 'center',
+    },
 });
