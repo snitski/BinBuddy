@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import * as FileSystem from 'expo-file-system';
 import ResultView from './components/ResultView';
 
+// Uploading the image to the serve and getting labels
 const uploadImage = async (uri: string) => {
     console.log('Uploading image...');
     const res = await FileSystem.uploadAsync('http://172.30.6.209:5000', uri, {
@@ -24,11 +25,13 @@ export default function App() {
     const [labelText, setLabelText] = useState<string | null>(null);
     const [confirmed, setConfirmed] = useState(false);
 
+    // Getting labels from the image
     useEffect(() => {
         if (image) {
             (async () => {
+                // Getting the labels from the server
                 const labels = await uploadImage(image);
-                console.log(labels);
+                // Formatting the labels
                 const label = labels.labels[0][0]
                     .toLowerCase()
                     .split(' ')
@@ -39,19 +42,19 @@ export default function App() {
                     .split(' ')
                     .map((s: string) => s.charAt(0).toUpperCase() + s.substring(1))
                     .join(' ');
+                // Setting the labelText
                 setLabelText(sublabel ? `${label} (${sublabel})` : label);
                 setConfirmed(false);
 
+                // Setting the slug
                 if (sublabel) {
                     let path =
                         label.toLowerCase().replace(' ', '-') +
                         '-' +
                         sublabel.toLowerCase().replace(' ', '-');
-                    console.log(path);
                     setSlug(path);
                 } else {
                     let path = label.toLowerCase().replace(' ', '-');
-                    console.log(path);
                     setSlug(path);
                 }
             })();
