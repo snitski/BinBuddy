@@ -45,7 +45,7 @@ Currently, we do not have a production build of any of these components. However
 - Frontend: `cd frontend && npm install && npx expo start`
     - You will need to install the Expo Go app on your phone. Then, scan the QR code in the terminal to run the app on your phone.
     - You will also need to modify the `BACKEND_URL` and `KB_URL` variables in `frontend/constants.ts` to point to your local backend and knowledge base.
-- Backend: `cd backend && pip install -r requirements.txt && python app.py`
+- Backend: `cd backend && pip install -r requirements.txt && flask --app server run --host=0.0.0.0`
     - This may take a while to start up as the CLIP model needs to be downloaded.
 - Knowledge Base: `cd content && npm install && npm run dev`
     - You can view the knowledge base at `localhost:3000`
