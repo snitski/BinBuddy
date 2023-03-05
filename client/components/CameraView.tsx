@@ -13,27 +13,32 @@ export default function CameraView(props: {
     const [permission, requestPermission] = Camera.useCameraPermissions();
     const camera = useRef<Camera>(null);
 
+    // Getting width and height of the screen
     const { width } = useWindowDimensions();
     const height = Math.round((width * 16) / 9);
 
+    // Requesting permission to use the camera
     if (!permission?.granted) requestPermission();
 
+    // Toggling between front and back camera
     const toggleCameraType = async () => {
         setType(type === CameraType.back ? CameraType.front : CameraType.back);
     };
 
+    // Capturing image
     const captureImageAsync = async () => {
-        console.log('Capturing image...');
         if (camera.current != null) {
             let imageData = await camera.current.takePictureAsync({
                 quality: 1,
                 imageType: ImageType.jpg,
             });
+            // Pausing the preview while image is being processed
             await camera.current.pausePreview();
             props.setImage(imageData.uri);
         }
     };
 
+    // Selecting image from gallery
     const pickImageAsync = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
             quality: 1,
@@ -56,16 +61,14 @@ export default function CameraView(props: {
                     ratio="16:9"
                     type={type}
                     style={{ ...styles.camera, height: height, width: '100%' }}
-                    ref={camera}
-                >
+                    ref={camera}>
                     <View style={styles.topCamera}>
-                        <TouchableOpacity 
-                            style={styles.button} 
+                        <TouchableOpacity
+                            style={styles.button}
                             onPress={() => {
                                 props.setCameraIsOpen(false);
                                 props.setImage(null);
-                            }}
-                        >
+                            }}>
                             <AntDesign name="back" size={25} color={'#609966'} />
                         </TouchableOpacity>
                     </View>
@@ -74,14 +77,21 @@ export default function CameraView(props: {
                             <AntDesign name="picture" size={25} color="#609966" />
                         </TouchableOpacity>
 
-                        <TouchableOpacity style={styles.shutterButton} onPress={captureImageAsync} />
+                        <TouchableOpacity
+                            style={styles.shutterButton}
+                            onPress={captureImageAsync}
+                        />
 
                         <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
                             <AntDesign name="sync" size={25} color="#609966" />
                         </TouchableOpacity>
                     </View>
                 </Camera>
-            ) : (<View><Text>Please provide camera permission.</Text></View>)}
+            ) : (
+                <View>
+                    <Text>Please provide camera permission.</Text>
+                </View>
+            )}
         </View>
     );
 }
@@ -92,7 +102,7 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#000'
+        backgroundColor: '#000',
     },
     camera: {
         alignSelf: 'stretch',
@@ -100,7 +110,7 @@ const styles = StyleSheet.create({
     },
     topCamera: {
         flex: 1,
-        backgroundColor: 'transparent'
+        backgroundColor: 'transparent',
     },
     bottomCamera: {
         flex: 1,
@@ -109,7 +119,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         flexDirection: 'row',
         columnGap: 30,
-        backgroundColor: 'transparent'
+        backgroundColor: 'transparent',
     },
     button: {
         width: 50,
@@ -118,7 +128,7 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         backgroundColor: '#EDF1D6',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     shutterButton: {
         width: 70,
@@ -127,6 +137,6 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         backgroundColor: '#EDF1D6',
         alignItems: 'center',
-        justifyContent: 'center'
-    }
+        justifyContent: 'center',
+    },
 });
