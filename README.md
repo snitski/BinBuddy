@@ -1,7 +1,7 @@
 ![github repo badge: frontend](https://img.shields.io/badge/Frontend-Expo-black) ![github repo badge: backend](https://img.shields.io/badge/Backend-Flask-white) ![github repo badge: css](https://img.shields.io/badge/Backend-NextJS-blue) ![github repo badge: api](https://img.shields.io/badge/API-Clip-purple) ![github repo badge: css](https://img.shields.io/badge/CSS-TailwindCSS-blue) 
 
 # BinBuddy
-
+![Screenshots](https://cdn.discordapp.com/attachments/1079107902540894259/1081778768898699275/screenshots.png)
 BinBuddy is an iOS / Android app which utilizes [OpenAI's CLIP](https://openai.com/research/clip) to help you determine how to properly recycle different types of waste just from a single photo.
 
 Once BinBuddy identifies the item and the material it's made of, it provides you with information on how to recycle or dispose of it correctly.
