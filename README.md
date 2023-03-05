@@ -8,6 +8,8 @@ Once BinBuddy identifies the item and the material it's made of, it provides you
 
 Currently, BinBuddy's knowledge base is limited to information for Brookhaven, NY. However, by contributing to this GitHub repository, community members can contribute up-to-date information on how to recycle different types of waste in their own communities.
 
+This project was made for [Hack@CEWIT 2023](https://www.cewit.org/hackatcewit/). You can see our DevPost page [here](https://devpost.com/software/binbuddy).
+
 # Inspiration
 
 A common problem we often run into in our lives is how to recycle properly. In schools, we're always told to recycle to contribute to a more sustainable future, but we're never told how.
