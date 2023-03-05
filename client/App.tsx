@@ -1,14 +1,15 @@
-import { StyleSheet, Text, View, Alert, TouchableOpacity } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import CameraView from './components/CameraView';
 import SplashScreen from './components/SplashScreen';
 import { useEffect, useState } from 'react';
 import * as FileSystem from 'expo-file-system';
 import ResultView from './components/ResultView';
+import { BACKEND_URL } from './constants';
 
 // Uploading the image to the serve and getting labels
 const uploadImage = async (uri: string) => {
     console.log('Uploading image...');
-    const res = await FileSystem.uploadAsync('http://172.30.6.209:5000', uri, {
+    const res = await FileSystem.uploadAsync(BACKEND_URL, uri, {
         uploadType: FileSystem.FileSystemUploadType.MULTIPART,
         fieldName: 'image',
         httpMethod: 'POST',

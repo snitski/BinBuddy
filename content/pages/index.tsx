@@ -2,7 +2,6 @@ import fs from 'fs';
 import matter from 'gray-matter';
 import Link from 'next/link';
 import Head from 'next/head';
-import styles from '../styles/Home.module.css';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 
 type Page = {
@@ -14,16 +13,16 @@ type Page = {
 
 export default function Home({ pages }: InferGetStaticPropsType<typeof getStaticProps>) {
     return (
-        <div className={styles['container']}>
+        <div className='prose prose-olive p-4'>
             <Head>
-                <title>Pages</title>
+                <title>BinBuddy Knowledge Base</title>
             </Head>
-            <h1 className={styles['header']}>Welcome to our pages</h1>
-            <ul className={styles['page-list']}>
+            <h1>BinBuddy's Knowledge Base</h1>
+            <ul>
                 {pages.map((page) => (
                     <li key={page.slug}>
                         <Link href={`/pages/${page.slug}`}>
-                            {page.location}:{page.title}
+                            {page.title} - {page.location}
                         </Link>
                     </li>
                 ))}

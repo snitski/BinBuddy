@@ -4,6 +4,7 @@ import { useFonts, Lato_400Regular, Lato_900Black } from '@expo-google-fonts/lat
 import { AntDesign } from '@expo/vector-icons';
 import Constants from 'expo-constants';
 import { Image } from 'expo-image';
+import { KB_URL } from '../constants';
 
 export default function ResultView(props: {
     setImage: (image: string | null) => void;
@@ -71,7 +72,7 @@ export default function ResultView(props: {
             ) : (
                 <WebView
                     style={styles.main}
-                    source={{ uri: `http://172.30.6.209:3000/pages/${props.slug}` }}
+                    source={{ uri: `${KB_URL}/pages/${props.slug}` }}
                 />
             )}
         </>
