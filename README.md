@@ -1,4 +1,4 @@
-![github repo badge: frontend](https://img.shields.io/badge/Frontend-Expo-181717?color=blue) ![github repo badge: backend](https://img.shields.io/badge/Backend-Flask-181717?color=blue) ![github repo badge: api](https://img.shields.io/badge/API-Clip-181717?color=purple)
+![github repo badge: frontend](https://img.shields.io/badge/Frontend-Expo-black) ![github repo badge: backend](https://img.shields.io/badge/Backend-Flask-white) ![github repo badge: css](https://img.shields.io/badge/Backend-NextJS-blue) ![github repo badge: api](https://img.shields.io/badge/API-Clip-purple) ![github repo badge: css](https://img.shields.io/badge/CSS-TailwindCSS-blue) 
 
 # BinBuddy
 

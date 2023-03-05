@@ -61,7 +61,9 @@ export default function CameraView(props: {
                     ratio="16:9"
                     type={type}
                     style={{ ...styles.camera, height: height, width: '100%' }}
-                    ref={camera}>
+                    ref={camera}
+                    onCameraReady={() => {if(!permission) requestPermission()}}
+                >
                     <View style={styles.topCamera}>
                         <TouchableOpacity
                             style={styles.button}
