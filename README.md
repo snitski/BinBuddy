@@ -39,7 +39,7 @@ This would not only make BinBuddy more convenient to use for people but also wou
 BinBuddy is split into three separate components:
 - Frontend: The frontend is written in React Native and Expo. It is responsible for the UI and user interaction.
 - Backend: The backend is written in Python and Flask. It utilizes [HuggingFace Transformers](https://huggingface.co/transformers/) to run the CLIP model, processing images and returning the results to the frontend.
-- Knowledge Base: The knowledge base uses Next.js to render Markdown files containing information on how to recycle different types of waste. This content can be found in the `content/content/pages` directory.
+- Knowledge Base: The knowledge base uses Next.js and Tailwind CSS to render Markdown files containing information on how to recycle different types of waste. This content can be found in the `content/content/pages` directory.
 
 Currently, we do not have a production build of any of these components. However, if you are feeling adventurous, you can run the frontend and backend locally:
 - Frontend: `cd frontend && npm install && npx expo start`
