@@ -1,14 +1,18 @@
 ![github repo badge: frontend](https://img.shields.io/badge/Frontend-Expo-black) ![github repo badge: backend](https://img.shields.io/badge/Backend-Flask-white) ![github repo badge: css](https://img.shields.io/badge/Backend-NextJS-blue) ![github repo badge: api](https://img.shields.io/badge/API-Clip-purple) ![github repo badge: css](https://img.shields.io/badge/CSS-TailwindCSS-blue) 
 
+## 2023 Hack@CEWIT "Spark of Genius" Award Winner
+
 # BinBuddy
+
 ![Screenshots](https://cdn.discordapp.com/attachments/1079107902540894259/1081778768898699275/screenshots.png)
+
 BinBuddy is an iOS / Android app which utilizes [OpenAI's CLIP](https://openai.com/research/clip) to help you determine how to properly recycle different types of waste just from a single photo.
 
 Once BinBuddy identifies the item and the material it's made of, it provides you with information on how to recycle or dispose of it correctly.
 
 Currently, BinBuddy's knowledge base is limited to information for Brookhaven, NY. However, by contributing to this GitHub repository, community members can contribute up-to-date information on how to recycle different types of waste in their own communities.
 
-This project was made for [Hack@CEWIT 2023](https://www.cewit.org/hackatcewit/). You can see our DevPost page [here](https://devpost.com/software/binbuddy).
+This project was made for [Hack@CEWIT 2023](https://www.cewit.org/hackatcewit/) and won the "Spark of Genius" award. You can see our DevPost page [here](https://devpost.com/software/binbuddy).
 
 # Inspiration
 
